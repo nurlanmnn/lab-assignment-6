@@ -4,15 +4,20 @@
 
 int search(int numbers[], int low, int high, int value) 
 {
-	if (low != high){
-		if (numbers[low] == value){
-			return low;
-		} else {
-			return search(numbers, ++low, high, value);
-		}
-	} else {
-		return -1;
-	}
+	if (low <= high) {
+        int mid = low + (high - low) / 2;
+
+        if (numbers[mid] == value) {
+            return mid; // Low==High case returning mid
+        }
+        else if (numbers[mid] < value) {
+            return search(numbers, mid + 1, high, value); // Goes to the right half
+        }
+        else {
+            return search(numbers, low, mid - 1, value);  // Goes to the left half
+        }
+    }
+    return -1;
 }
 
 void printArray(int numbers[], int sz)
